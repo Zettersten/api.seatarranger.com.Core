@@ -1,7 +1,6 @@
 ﻿using api.seatarranger.com.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace api.seatarranger.com.Core.Tests.Fixtures
 {
@@ -36,7 +35,6 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                         Id = 'D',
                         Capacity = 7
                     }
-
                 };
             }
         }
@@ -96,7 +94,6 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                         Name = "Reese",
                         Size = 7
                     },
-
                 };
             }
         }
@@ -136,7 +133,6 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                             hoying,
                             taylor
                         }
-
                     },
 
                     {
@@ -200,7 +196,6 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                             }
                         }
                     }
-
                 };
             }
         }

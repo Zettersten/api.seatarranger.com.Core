@@ -3,8 +3,6 @@ using api.seatarranger.com.Core.Services.ArrangerService;
 using api.seatarranger.com.Core.Services.PartyService;
 using api.seatarranger.com.Core.Services.TableService;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace api.seatarranger.com.Core.Tests.Fixtures
 {

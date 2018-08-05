@@ -1,9 +1,6 @@
 ﻿using api.seatarranger.com.Core.Extensions;
-using api.seatarranger.com.Core.Models;
 using api.seatarranger.com.Core.Tests.Fixtures;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace api.seatarranger.com.Core.Tests.Services.ArrangerService
@@ -31,7 +28,7 @@ namespace api.seatarranger.com.Core.Tests.Services.ArrangerService
         {
             Assert.Throws<Exception>(
                 testCode: () => this.services.arrangerService
-                .ArrangeParties(this.services.mockData.PartyEntities, null)
+                    .ArrangeParties(this.services.mockData.PartyEntities, null)
             );
         }
 
@@ -40,7 +37,7 @@ namespace api.seatarranger.com.Core.Tests.Services.ArrangerService
         {
             Assert.Throws<Exception>(
                 testCode: () => this.services.arrangerService
-                .ArrangeParties(null, this.services.mockData.TableEntities)
+                    .ArrangeParties(null, this.services.mockData.TableEntities)
             );
         }
 

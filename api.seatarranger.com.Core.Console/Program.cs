@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace api.seatarranger.com.Core.Console
+﻿namespace api.seatarranger.com.Core.Console
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
         }

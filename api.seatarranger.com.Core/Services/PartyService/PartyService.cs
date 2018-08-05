@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using api.seatarranger.com.Core.Models;
+﻿using api.seatarranger.com.Core.Models;
 using api.seatarranger.com.Core.Repositories.InMemoryRepository;
+using System;
 
 namespace api.seatarranger.com.Core.Services.PartyService
 {

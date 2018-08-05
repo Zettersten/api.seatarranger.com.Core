@@ -1,8 +1,5 @@
 ﻿using api.seatarranger.com.Core.Configurations;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace api.seatarranger.com.Core.Extensions
 {
