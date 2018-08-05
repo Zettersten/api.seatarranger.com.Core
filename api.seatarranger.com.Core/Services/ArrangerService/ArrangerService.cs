@@ -8,7 +8,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
 {
     public class ArrangerService : IArrangerService
     {
-        public Dictionary<TableEntity, HashSet<PartyEntity>> ArrangeParties(List<PartyEntity> partyEntities, List<TableEntity> tableEntities)
+        public Dictionary<TableEntity, List<PartyEntity>> ArrangeParties(List<PartyEntity> partyEntities, List<TableEntity> tableEntities)
         {
             #region Validation
 
@@ -54,7 +54,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
              *      - Reese, party of 7
              */
 
-            var finalResult = new Dictionary<TableEntity, HashSet<PartyEntity>>();
+            var finalResult = new Dictionary<TableEntity, List<PartyEntity>>();
             var sortedParties = partyEntities.SortByLargestPartyFirst();
 
             /**
@@ -73,7 +73,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
                  */
                 if (!finalResult.ContainsKey(table))
                 {
-                    finalResult.Add(table, new HashSet<PartyEntity>());
+                    finalResult.Add(table, new List<PartyEntity>());
                 }
 
                 for (int partyIndex = 0; partyIndex < sortedParties.Count; partyIndex++)
