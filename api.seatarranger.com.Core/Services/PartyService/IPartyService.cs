@@ -1,4 +1,5 @@
-﻿using api.seatarranger.com.Core.Models;
+﻿using System.Collections.Generic;
+using api.seatarranger.com.Core.Models;
 
 namespace api.seatarranger.com.Core.Services.PartyService
 {
@@ -8,6 +9,6 @@ namespace api.seatarranger.com.Core.Services.PartyService
 
         PartyEntity GetParty(string name);
 
-        PartyEntity[] GetParties();
+        List<PartyEntity> GetParties();
     }
 }

@@ -6,11 +6,11 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
 {
     public class MockFixtures : IDisposable
     {
-        public TableEntity[] TableEntities
+        public List<TableEntity> TableEntities
         {
             get
             {
-                return new TableEntity[]
+                return new List<TableEntity>
                 {
                     new TableEntity
                     {
@@ -39,7 +39,7 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
             }
         }
 
-        public PartyEntity[] PartyEntities
+        public List<PartyEntity> PartyEntities
         {
             get
             {
@@ -61,7 +61,7 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                     Size = 5
                 };
 
-                return new PartyEntity[]
+                return new List<PartyEntity>
                 {
                     hoying,
                     garcia,
@@ -70,7 +70,7 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                     {
                         Name = "Owens",
                         Size = 6,
-                        Dislikes = new HashSet<PartyEntity>
+                        Dislikes = new List<PartyEntity>
                         {
                             hoying,
                             taylor
@@ -81,7 +81,7 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                     {
                         Name = "Smith",
                         Size = 1,
-                        Dislikes = new HashSet<PartyEntity>
+                        Dislikes = new List<PartyEntity>
                         {
                             garcia
                         }
@@ -97,109 +97,6 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                 };
             }
         }
-
-        public Dictionary<TableEntity, PartyEntity[]> GoodResults
-        {
-            get
-            {
-                var hoying = new PartyEntity
-                {
-                    Name = "Hoying",
-                    Size = 3
-                };
-
-                var garcia = new PartyEntity
-                {
-                    Name = "Garcia",
-                    Size = 2
-                };
-
-                var taylor = new PartyEntity
-                {
-                    Name = "Taylor",
-                    Size = 5
-                };
-
-                return new Dictionary<TableEntity, PartyEntity[]>
-                {
-                    {
-                        new TableEntity {
-                            Id = 'A',
-                            Capacity = 8
-                        },
-
-                        new PartyEntity[]
-                        {
-                            hoying,
-                            taylor
-                        }
-                    },
-
-                    {
-                        new TableEntity
-                        {
-                            Id = 'B',
-                            Capacity = 8
-                        },
-
-                        new PartyEntity[]
-                        {
-                            new PartyEntity
-                            {
-                                Name = "Smith",
-                                Size = 1,
-                                Dislikes = new HashSet<PartyEntity>
-                                {
-                                    garcia
-                                }
-                            },
-
-                            new PartyEntity
-                            {
-                                Name = "Owens",
-                                Size = 6,
-                                Dislikes = new HashSet<PartyEntity>
-                                {
-                                    hoying,
-                                    taylor
-                                }
-                            }
-                        }
-                    },
-
-                    {
-                        new TableEntity
-                        {
-                            Id = 'C',
-                            Capacity = 7
-                        },
-
-                        new PartyEntity[]
-                        {
-                            garcia
-                        }
-                    },
-
-                    {
-                        new TableEntity
-                        {
-                            Id = 'D',
-                            Capacity = 7
-                        },
-
-                        new PartyEntity[]
-                        {
-                            new PartyEntity
-                            {
-                                Name = "Reese",
-                                Size = 7
-                            }
-                        }
-                    }
-                };
-            }
-        }
-
         public void Dispose()
         {
             return;

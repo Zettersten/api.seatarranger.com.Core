@@ -13,7 +13,7 @@ namespace api.seatarranger.com.Core.Repositories
 
         void Delete(S id);
 
-        T[] ReadAll();
+        List<T> ReadAll();
 
         IDictionary<S, T> DbContext { get; }
     }

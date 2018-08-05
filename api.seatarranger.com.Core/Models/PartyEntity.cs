@@ -8,6 +8,6 @@ namespace api.seatarranger.com.Core.Models
 
         public int Size { get; set; }
 
-        public HashSet<PartyEntity> Dislikes { get; set; }
+        public List<PartyEntity> Dislikes { get; set; }
     }
 }

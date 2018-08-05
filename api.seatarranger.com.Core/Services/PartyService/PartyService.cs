@@ -1,6 +1,8 @@
-﻿using api.seatarranger.com.Core.Models;
+﻿using api.seatarranger.com.Core.Extensions;
+using api.seatarranger.com.Core.Models;
 using api.seatarranger.com.Core.Repositories.InMemoryRepository;
 using System;
+using System.Collections.Generic;
 
 namespace api.seatarranger.com.Core.Services.PartyService
 {
@@ -15,17 +17,29 @@ namespace api.seatarranger.com.Core.Services.PartyService
 
         public void CreateParty(PartyEntity partyEntity)
         {
-            throw new NotImplementedException();
+            if (partyEntity.Size == 0)
+            {
+                throw new Exception("Cannot create a party with a size of zero.");
+            }
+
+            if (string.IsNullOrWhiteSpace(partyEntity.Name))
+            {
+                throw new Exception("Cannot create a party with no name.");
+            }
+
+            this.CreateParty(partyEntity);
         }
 
-        public PartyEntity[] GetParties()
+        public List<PartyEntity> GetParties()
         {
-            throw new NotImplementedException();
+            return this.partyRepository
+                .ReadAll()
+                .SortByLargestPartyFirst();
         }
 
         public PartyEntity GetParty(string name)
         {
-            throw new NotImplementedException();
+            return this.GetParty(name);
         }
     }
 }

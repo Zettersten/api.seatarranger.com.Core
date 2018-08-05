@@ -1,6 +1,7 @@
 ﻿using api.seatarranger.com.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace api.seatarranger.com.Core.Repositories.InMemoryRepository
 {
@@ -15,27 +16,54 @@ namespace api.seatarranger.com.Core.Repositories.InMemoryRepository
 
         public void Create(PartyEntity model)
         {
-            throw new NotImplementedException();
+            if (!db.ContainsKey(model.Name))
+            {
+                db.Add(model.Name, model);
+                return;
+            }
+
+            throw new Exception("Cannot create table that already exists.");
         }
 
-        public void Delete(string name)
+        public void Delete(string id)
         {
-            throw new NotImplementedException();
+            if (db.ContainsKey(id))
+            {
+                db.Remove(id);
+                return;
+            }
+
+            throw new Exception("Cannot delete table that doesnt exists.");
         }
 
-        public PartyEntity Read(string name)
+        public PartyEntity Read(string id)
         {
-            throw new NotImplementedException();
+            if (db.ContainsKey(id))
+            {
+                return db[id];
+            }
+
+            throw new Exception("Table does not exist.");
         }
 
-        public PartyEntity[] ReadAll()
+        public List<PartyEntity> ReadAll()
         {
-            throw new NotImplementedException();
+            if (db.Count == 0)
+            {
+                return new List<PartyEntity>();
+            }
+
+            return db.Values.ToList();
         }
 
-        public void Update(string name, PartyEntity model)
+        public void Update(string id, PartyEntity model)
         {
-            throw new NotImplementedException();
+            if (db.ContainsKey(id))
+            {
+                db.Remove(id);
+            }
+
+            db.Add(id, model);
         }
 
         public IDictionary<string, PartyEntity> DbContext => db;

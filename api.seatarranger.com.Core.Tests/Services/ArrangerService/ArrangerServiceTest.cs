@@ -42,15 +42,33 @@ namespace api.seatarranger.com.Core.Tests.Services.ArrangerService
         }
 
         [Fact]
-        public void Should_Produce_Matching_Results_With_Good_Tables_And_Good_Parties()
+        public void Should_Throw_When_Single_Party_Exceeds_Capacity_And_Good_Tables()
         {
-            var results = this.services.arrangerService
-                .ArrangeParties(this.services.mockData.PartyEntities, this.services.mockData.TableEntities);
+            Assert.False(true);
+        }
 
-            var expected = this.services.mockData.GoodResults.ToJson();
-            var actual = results.ToJson();
+        [Fact]
+        public void Should_Throw_When_Overall_Parties_Exceed_Capacity_And_Good_Tables()
+        {
+            Assert.False(true);
+        }
 
-            Assert.Equal(expected, actual);
+        [Fact]
+        public void Should_Sit_Parties_At_Tables_Without_Dislikes()
+        {
+            Assert.False(true);
+        }
+
+        [Fact]
+        public void Should_Sit_Parties_At_Tables_With_Dislikes_Perferred()
+        {
+            Assert.False(true);
+        }
+
+        [Fact]
+        public void Should_Sit_Parties_At_Tables_When_Dislike_Conditions_Are_Not_Met()
+        {
+            Assert.False(true);
         }
     }
 }

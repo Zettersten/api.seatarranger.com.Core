@@ -1,4 +1,5 @@
-﻿using api.seatarranger.com.Core.Models;
+﻿using System.Collections.Generic;
+using api.seatarranger.com.Core.Models;
 
 namespace api.seatarranger.com.Core.Services.TableService
 {
@@ -8,6 +9,6 @@ namespace api.seatarranger.com.Core.Services.TableService
 
         TableEntity GetTable(char id);
 
-        TableEntity[] GetTables();
+        List<TableEntity> GetTables();
     }
 }

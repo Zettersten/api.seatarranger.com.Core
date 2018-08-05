@@ -8,7 +8,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
 {
     public class ArrangerService : IArrangerService
     {
-        public Dictionary<TableEntity, HashSet<PartyEntity>> ArrangeParties(PartyEntity[] partyEntities, TableEntity[] tableEntities)
+        public Dictionary<TableEntity, HashSet<PartyEntity>> ArrangeParties(List<PartyEntity> partyEntities, List<TableEntity> tableEntities)
         {
             #region Validation
 
@@ -22,12 +22,12 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
                 throw new Exception("Tables cannot be null.");
             }
 
-            if (tableEntities.Length == 0)
+            if (tableEntities.Count == 0)
             {
                 throw new Exception("There must be atleast 1 table to arrange parties.");
             }
 
-            if (partyEntities.Length == 0)
+            if (partyEntities.Count == 0)
             {
                 throw new Exception("There must be atleast 1 party to arrange seating.");
             }
@@ -55,7 +55,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
              */
 
             var finalResult = new Dictionary<TableEntity, HashSet<PartyEntity>>();
-            var sortedParties = partyEntities.OrderByDescending(x => x.Size).ToArray();
+            var sortedParties = partyEntities.SortByLargestPartyFirst();
 
             /**
              * Track last added table
@@ -63,7 +63,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
             var addedParties = new HashSet<PartyEntity>();
             PartyEntity lastAddedParty = null;
 
-            for (int tableIndex = 0; tableIndex < tableEntities.Length; tableIndex++)
+            for (int tableIndex = 0; tableIndex < tableEntities.Count; tableIndex++)
             {
                 var table = tableEntities[tableIndex];
                 var currentSize = 0;
@@ -76,7 +76,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
                     finalResult.Add(table, new HashSet<PartyEntity>());
                 }
 
-                for (int partyIndex = 0; partyIndex < sortedParties.Length; partyIndex++)
+                for (int partyIndex = 0; partyIndex < sortedParties.Count; partyIndex++)
                 {
                     var party = sortedParties[partyIndex];
 

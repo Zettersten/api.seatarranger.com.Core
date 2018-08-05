@@ -1,6 +1,8 @@
-﻿using api.seatarranger.com.Core.Models;
+﻿using api.seatarranger.com.Core.Extensions;
+using api.seatarranger.com.Core.Models;
 using api.seatarranger.com.Core.Repositories.InMemoryRepository;
 using System;
+using System.Collections.Generic;
 
 namespace api.seatarranger.com.Core.Services.TableService
 {
@@ -15,17 +17,34 @@ namespace api.seatarranger.com.Core.Services.TableService
 
         public void CreateTable(TableEntity tableEntity)
         {
-            throw new NotImplementedException();
+            if (tableEntity.Capacity == 0)
+            {
+                throw new Exception("Cannot create a table with a capacity of zero.");
+            }
+
+            if (!char.IsLetter(tableEntity.Id))
+            {
+                throw new Exception("Cannot create a table with ID that is not a letter.");
+            }
+
+            if (!char.IsUpper(tableEntity.Id))
+            {
+                throw new Exception("Cannot create a table with a lowercase tabel ID.");
+            }
+
+            this.tableRepository.Create(tableEntity);
         }
 
         public TableEntity GetTable(char id)
         {
-            throw new NotImplementedException();
+            return this.tableRepository.Read(id);
         }
 
-        public TableEntity[] GetTables()
+        public List<TableEntity> GetTables()
         {
-            throw new NotImplementedException();
+            return this.tableRepository
+                .ReadAll()
+                .SortByLargestTableFirst();
         }
     }
 }
