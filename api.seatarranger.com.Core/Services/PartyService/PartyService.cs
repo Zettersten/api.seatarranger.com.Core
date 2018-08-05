@@ -17,6 +17,8 @@ namespace api.seatarranger.com.Core.Services.PartyService
 
         public void CreateParty(PartyEntity partyEntity)
         {
+            #region Validation
+
             if (partyEntity.Size == 0)
             {
                 throw new Exception("Cannot create a party with a size of zero.");
@@ -26,6 +28,8 @@ namespace api.seatarranger.com.Core.Services.PartyService
             {
                 throw new Exception("Cannot create a party with no name.");
             }
+
+            #endregion Validation
 
             this.CreateParty(partyEntity);
         }

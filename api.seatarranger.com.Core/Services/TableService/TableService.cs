@@ -17,6 +17,8 @@ namespace api.seatarranger.com.Core.Services.TableService
 
         public void CreateTable(TableEntity tableEntity)
         {
+            #region Validation
+
             if (tableEntity.Capacity == 0)
             {
                 throw new Exception("Cannot create a table with a capacity of zero.");
@@ -31,6 +33,8 @@ namespace api.seatarranger.com.Core.Services.TableService
             {
                 throw new Exception("Cannot create a table with a lowercase tabel ID.");
             }
+
+            #endregion Validation
 
             this.tableRepository.Create(tableEntity);
         }
