@@ -6,7 +6,7 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
 {
     public class MockFixtures : IDisposable
     {
-        public List<TableEntity> TableEntities
+        public List<TableEntity> Mock_Tables_Good
         {
             get
             {
@@ -39,7 +39,7 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
             }
         }
 
-        public List<PartyEntity> PartyEntities
+        public List<PartyEntity> Mock_Parties_Good
         {
             get
             {
@@ -97,6 +97,74 @@ namespace api.seatarranger.com.Core.Tests.Fixtures
                 };
             }
         }
+
+        public List<PartyEntity> Mock_Parties_Bad_Single_Too_Large
+        {
+            get
+            {
+                return new List<PartyEntity>
+                {
+                    new PartyEntity
+                    {
+                        Name = "Does not matter",
+                        Size = 99
+                    }
+                };
+            }
+        }
+
+        public List<PartyEntity> Mock_Parties_Bad_Single_Later_In_List_Too_Large
+        {
+            get
+            {
+                return new List<PartyEntity>
+                {
+                    new PartyEntity
+                    {
+                        Name = "Test",
+                        Size = 2
+                    },
+
+                    new PartyEntity
+                    {
+                        Name = "Does not matter",
+                        Size = 99
+                    }
+                };
+            }
+        }
+
+        public List<PartyEntity> Mock_Parties_Bad_Too_Many_Entries
+        {
+            get
+            {
+                var result = Mock_Parties_Good;
+
+                result.
+                    Add(new PartyEntity
+                    {
+                        Name = "Richard",
+                        Size = 2
+                    });
+
+                result.
+                    Add(new PartyEntity
+                    {
+                        Name = "Erik",
+                        Size = 5
+                    });
+
+                result.
+                    Add(new PartyEntity
+                    {
+                        Name = "Wendy",
+                        Size = 1
+                    });
+
+                return result;
+            }
+        }
+
         public void Dispose()
         {
             return;

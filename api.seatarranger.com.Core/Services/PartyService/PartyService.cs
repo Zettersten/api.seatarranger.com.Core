@@ -1,6 +1,6 @@
 ﻿using api.seatarranger.com.Core.Extensions;
 using api.seatarranger.com.Core.Models;
-using api.seatarranger.com.Core.Repositories.InMemoryRepository;
+using api.seatarranger.com.Core.Repositories;
 using System;
 using System.Collections.Generic;
 
@@ -8,9 +8,9 @@ namespace api.seatarranger.com.Core.Services.PartyService
 {
     public class PartyService : IPartyService
     {
-        private readonly PartyRepository partyRepository;
+        private readonly IRepository<string, PartyEntity> partyRepository;
 
-        public PartyService(PartyRepository partyRepository)
+        public PartyService(IRepository<string, PartyEntity> partyRepository)
         {
             this.partyRepository = partyRepository;
         }
@@ -31,7 +31,7 @@ namespace api.seatarranger.com.Core.Services.PartyService
 
             #endregion Validation
 
-            this.CreateParty(partyEntity);
+            this.partyRepository.Create(partyEntity);
         }
 
         public List<PartyEntity> GetParties()
@@ -43,7 +43,7 @@ namespace api.seatarranger.com.Core.Services.PartyService
 
         public PartyEntity GetParty(string name)
         {
-            return this.GetParty(name);
+            return this.partyRepository.Read(name);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using api.seatarranger.com.Core.Extensions;
 using api.seatarranger.com.Core.Models;
-using api.seatarranger.com.Core.Repositories.InMemoryRepository;
+using api.seatarranger.com.Core.Repositories;
 using System;
 using System.Collections.Generic;
 
@@ -8,9 +8,9 @@ namespace api.seatarranger.com.Core.Services.TableService
 {
     public class TableService : ITableService
     {
-        private readonly TableRepository tableRepository;
+        private readonly IRepository<char, TableEntity> tableRepository;
 
-        public TableService(TableRepository tableRepository)
+        public TableService(IRepository<char, TableEntity> tableRepository)
         {
             this.tableRepository = tableRepository;
         }

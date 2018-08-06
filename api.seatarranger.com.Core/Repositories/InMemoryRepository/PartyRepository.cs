@@ -22,7 +22,7 @@ namespace api.seatarranger.com.Core.Repositories.InMemoryRepository
                 return;
             }
 
-            throw new Exception("Cannot create table that already exists.");
+            throw new Exception("Cannot create party that already exists.");
         }
 
         public void Delete(string id)
@@ -33,7 +33,7 @@ namespace api.seatarranger.com.Core.Repositories.InMemoryRepository
                 return;
             }
 
-            throw new Exception("Cannot delete table that doesnt exists.");
+            throw new Exception("Cannot delete party that doesnt exists.");
         }
 
         public PartyEntity Read(string id)
@@ -43,7 +43,7 @@ namespace api.seatarranger.com.Core.Repositories.InMemoryRepository
                 return db[id];
             }
 
-            throw new Exception("Table does not exist.");
+            throw new Exception("Party does not exist.");
         }
 
         public List<PartyEntity> ReadAll()

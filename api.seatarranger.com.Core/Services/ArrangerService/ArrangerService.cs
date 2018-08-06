@@ -55,7 +55,10 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
              */
 
             var finalResult = new Dictionary<TableEntity, List<PartyEntity>>();
+
             var sortedParties = partyEntities.SortByLargestPartyFirst();
+            var sortedTables = tableEntities.SortByLargestTableFirst();
+
 
             /**
              * Track last added table
@@ -63,9 +66,9 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
             var addedParties = new HashSet<PartyEntity>();
             PartyEntity lastAddedParty = null;
 
-            for (int tableIndex = 0; tableIndex < tableEntities.Count; tableIndex++)
+            for (int tableIndex = 0; tableIndex < sortedTables.Count; tableIndex++)
             {
-                var table = tableEntities[tableIndex];
+                var table = sortedTables[tableIndex];
                 var currentSize = 0;
 
                 /**
@@ -82,10 +85,12 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
 
                     /**
                      * This party ain't gonna work here...
+                     *  - We throw exception becuase we know that parties and tables are 
+                     *    ordered from largest to smallest.    
                      */
                     if (party.Size > table.Capacity)
                     {
-                        continue;
+                        throw new Exception($"The party {party.Name} ({party.Size}) was too large to accommodate.");
                     }
 
                     /**
@@ -133,6 +138,11 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
 
                     currentSize = currentSize + party.Size;
                 }
+            }
+
+            if (sortedParties.Count != addedParties.Count)
+            {
+                throw new Exception("All parties must be assigned to tables.");
             }
 
             #endregion Algorithm
