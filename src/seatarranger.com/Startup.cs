@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using seatarranger.com.Core.Configurations;
+using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
 
 namespace seatarranger.com
 {
@@ -21,6 +23,70 @@ namespace seatarranger.com
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services
+                .AddCors(options =>
+                {
+                    options.AddPolicy("AllowAll", builder =>
+                    {
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
+                        builder.AllowAnyOrigin();
+                        builder.AllowCredentials();
+                    });
+                })
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(options =>
+                {
+                    var settings = JsonConfiguration.GetSerializerSettings();
+
+                    foreach (var converter in settings.Converters)
+                    {
+                        options.SerializerSettings.Converters.Add(converter);
+                    }
+
+                    options.SerializerSettings.DateFormatHandling = settings.DateFormatHandling;
+                    options.SerializerSettings.NullValueHandling = settings.NullValueHandling;
+                    options.SerializerSettings.Formatting = settings.Formatting;
+
+                    options.SerializerSettings.ContractResolver = settings.ContractResolver;
+                });
+
+            /*
+             * Documentation
+             */
+            services.AddApiVersioning();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.DescribeAllEnumsAsStrings();
+                c.DescribeAllParametersInCamelCase();
+
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Seat Arranger",
+                    Description = "A code demonstration for ByteCubed",
+
+                    License = new License
+                    {
+                        Name = "The Unlicense",
+                        Url = "http://bytecubed.com/"
+                    },
+                    Contact = new Contact
+                    {
+                        Name = "Erik Zettersten",
+                        Email = "erik@zettersten.com",
+                        Url = "http://bytecubed.com/"
+                    }
+                });
+
+                //Set the comments path for the swagger json and ui.
+                var xmlPath = Path.Combine("wwwroot", "seatarranger.com.xml");
+
+                c.IncludeXmlComments(xmlPath);
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -51,6 +117,20 @@ namespace seatarranger.com
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "api/swagger/{documentName}/swagger.json";
+            });
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "Seat Arranger");
+                c.RoutePrefix = "api/swagger";
+
+                c.InjectStylesheet("../../bytecubed.css");
             });
 
             app.UseSpa(spa =>

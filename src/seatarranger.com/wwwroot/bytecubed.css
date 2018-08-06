@@ -1,0 +1,25 @@
+﻿.swagger-ui .topbar {
+    background: #012b5b !important;
+}
+
+    .swagger-ui .topbar .download-url-wrapper .select-label {
+        color: white !important;
+    }
+
+        .swagger-ui .topbar .download-url-wrapper .select-label select {
+            border-color: #050919 !important;
+        }
+
+    .swagger-ui .topbar .topbar-wrapper a.link img {
+        display: none;
+    }
+
+    .swagger-ui .topbar .topbar-wrapper a.link span {
+        display: block;
+        overflow: hidden;
+        text-indent: -9999px;
+        background: url(http://bytecubed.com/wp-content/uploads/2016/08/logo.png) no-repeat;
+        width: 278px;
+        height: 62px;
+        padding: 0 !important;
+    }
