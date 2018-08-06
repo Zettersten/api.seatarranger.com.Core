@@ -88,7 +88,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
                      *  - We throw exception becuase we know that parties and tables are 
                      *    ordered from largest to smallest.    
                      */
-                    if (party.Size > table.Capacity)
+                    if (table.ExeedsCapacity(party))
                     {
                         throw new Exception($"The party {party.Name} ({party.Size}) was too large to accommodate.");
                     }
@@ -104,7 +104,7 @@ namespace api.seatarranger.com.Core.Services.ArrangerService
                     /**
                      * Exceeded table capacity
                      */
-                    if (party.Size + currentSize > table.Capacity)
+                    if (table.ExeedsCapacity(party, currentSize))
                     {
                         continue;
                     }
