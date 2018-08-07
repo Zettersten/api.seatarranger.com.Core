@@ -1,82 +1,88 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
+  <div class="row">
+    <div class="col">
 
-            <br />
-            <button (click)="expandedTable = true; expandedParty = false;" class="btn btn-large btn-primary btn-block">Create Table +</button>
-            <hr />
+      <br />
+      <button (click)="expandedTable = true; expandedParty = false;" class="btn btn-large btn-primary btn-block">Create Table +</button>
+      <hr />
 
-            <div *ngIf="expandedTable == true">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Create Table</h5>
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Table ID</label>
-                                <input type="text" name="id" [(ngModel)]="table.id" class="form-control" placeholder="Enter table ID">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Capacity</label>
-                                <input type="number" name="capacity" [(ngModel)]="table.capacity" class="form-control" placeholder="Enter table capacity">
-                            </div>
-                            <button type="submit" class="btn btn-primary" (click)="createTable(table); expandedParty = false;  expandedTable = false;">Submit {{table.id}}</button>
-                            <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
-                        </form>
-                    </div>
-                </div>
-                <br />
-            </div>
-
-            <div class="empty text-center" *ngIf="(tables && tables.value.length == 0) && !expandedTable">
-                <p>Please Create a Table</p>
-            </div>
-
-            <div class="card" *ngFor="let table of tables | async">
-                <div class="card-body">
-                    {{table.id}}-{{table.capacity}}
-                </div>
-            </div>
-
+      <div *ngIf="expandedTable == true">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Create Table</h5>
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Table ID</label>
+                <input type="text" name="id" [(ngModel)]="table.id" class="form-control" placeholder="Enter table ID">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Capacity</label>
+                <input type="number" name="capacity" [(ngModel)]="table.capacity" class="form-control" placeholder="Enter table capacity">
+              </div>
+              <button type="submit" class="btn btn-primary" (click)="createTable(table); expandedParty = false;  expandedTable = false;">Submit {{table.id}}</button>
+              <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
+            </form>
+          </div>
         </div>
-        <div class="col-8">
-            <button>Create Arrangement</button>
+        <br />
+      </div>
+
+      <div class="empty text-center" *ngIf="(tables && tables.value.length == 0) && !expandedTable">
+        <p>Please Create a Table</p>
+      </div>
+
+      <div class="card" *ngFor="let table of tables | async">
+        <div class="card-body">
+          {{table.id}}-{{table.capacity}}
         </div>
-        <div class="col">
+      </div>
 
-            <br />
-            <button (click)="expandedParty = true; expandedTable = false;" class="btn btn-large btn-primary btn-block">Create Party +</button>
-            <hr />
-
-            <div *ngIf="expandedParty == true">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Create Party</h5>
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Party Name</label>
-                                <input type="text" name="name" [(ngModel)]="party.name" class="form-control" placeholder="Enter party name">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Party Size</label>
-                                <input type="number" name="size" [(ngModel)]="party.size" class="form-control" placeholder="Enter party size">
-                            </div>
-                            <button type="submit" class="btn btn-primary" (click)="createParty(party); expandedParty = false; expandedTable = false;">Submit</button>
-                            <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
-                        </form>
-                    </div>
-                </div>
-                <br />
-            </div>
-
-            <div class="empty text-center" *ngIf="(parties && parties.value.length == 0) && !expandedParty">
-                <p>Please Create a Party</p>
-            </div>
-
-            <div class="card" *ngFor="let party of parties | async">
-                <div class="card-body">
-                    {{party.name}} <strong>({{party.size}})</strong>
-                </div>
-            </div>
-        </div>
     </div>
+
+
+    <div class="col-8 text-center">
+      <br />
+      <br />
+      <button class="btn btn-lg btn-success" *ngIf="canArrange | async" (click)="makeArrangements()">Create Arrangement</button>
+    </div>
+
+    <div class="col">
+
+      <br />
+      <button (click)="expandedParty = true; expandedTable = false;" class="btn btn-large btn-primary btn-block">Create Party +</button>
+      <hr />
+
+      <div *ngIf="expandedParty == true">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Create Party</h5>
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Party Name</label>
+                <input type="text" name="name" [(ngModel)]="party.name" class="form-control" placeholder="Enter party name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Party Size</label>
+                <input type="number" name="size" [(ngModel)]="party.size" class="form-control" placeholder="Enter party size">
+              </div>
+              <app-dislikes></app-dislikes>
+              <button type="submit" class="btn btn-primary" (click)="createParty(party); expandedParty = false; expandedTable = false;">Submit</button>
+              <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
+            </form>
+          </div>
+        </div>
+        <br />
+      </div>
+
+      <div class="empty text-center" *ngIf="(parties && parties.value.length == 0) && !expandedParty">
+        <p>Please Create a Party</p>
+      </div>
+
+      <div class="card" *ngFor="let party of parties | async">
+        <div class="card-body">
+          {{party.name}} <strong>({{party.size}})</strong>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

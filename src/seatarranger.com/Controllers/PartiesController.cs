@@ -10,12 +10,10 @@ namespace seatarranger.com.Controllers
     public class PartiesController : Controller
     {
         private readonly IPartyService partyService;
-        private readonly IRepository<string, PartyEntity> repository;
 
-        public PartiesController(IPartyService partyService, IRepository<string, PartyEntity> repository)
+        public PartiesController(IPartyService partyService)
         {
             this.partyService = partyService;
-            this.repository = repository;
         }
 
         [HttpGet]
@@ -35,7 +33,8 @@ namespace seatarranger.com.Controllers
         [HttpPost]
         public PartyEntity Post([FromBody] PartyEntity partyEntity)
         {
-            repository.Create(partyEntity);
+            partyService
+                .CreateParty(partyEntity);
 
             return partyEntity;
         }

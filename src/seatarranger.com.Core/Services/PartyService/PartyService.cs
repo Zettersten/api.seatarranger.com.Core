@@ -24,6 +24,11 @@ namespace seatarranger.com.Core.Services.PartyService
         {
             #region Validation
 
+            if (partyEntity == null)
+            {
+                throw new Exception("Looks like something was wrong with your input. Please use different values.");
+            }
+
             if (partyEntity.Size == 0)
             {
                 throw new Exception("Cannot create a party with a size of zero.");

@@ -24,6 +24,11 @@ namespace seatarranger.com.Core.Services.TableService
         {
             #region Validation
 
+            if (tableEntity == null)
+            {
+                throw new Exception("Looks like the input provided was not suitable.");
+            }
+
             if (tableEntity.Capacity == 0)
             {
                 throw new Exception("Cannot create a table with a capacity of zero.");

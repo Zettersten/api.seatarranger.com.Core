@@ -1,0 +1,11 @@
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Dislike Party Name</label>
+    <input type="text" name="name" [(ngModel)]="dislike.name" class="form-control" placeholder="Enter party name">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Dislike Party Size</label>
+    <input type="number" name="size" [(ngModel)]="dislike.size" class="form-control" placeholder="Enter party size">
+  </div>
+  <button type="submit" class="btn btn-dark btn-sm" (click)="createDislike(dislike);">Add Dislike</button>
+</form>

@@ -10,12 +10,10 @@ namespace seatarranger.com.Controllers
     public class TablesController : Controller
     {
         private readonly ITableService tableService;
-        private readonly IRepository<char, TableEntity> repository;
 
-        public TablesController(ITableService tableService, IRepository<char, TableEntity> repository)
+        public TablesController(ITableService tableService)
         {
             this.tableService = tableService;
-            this.repository = repository;
         }
 
         [HttpGet]
@@ -37,7 +35,8 @@ namespace seatarranger.com.Controllers
         [HttpPost]
         public TableEntity Post([FromBody] TableEntity tableEntity)
         {
-            repository.Create(tableEntity);
+            tableService
+                .CreateTable(tableEntity);
 
             return tableEntity;
         }

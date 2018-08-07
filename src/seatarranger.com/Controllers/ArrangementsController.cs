@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using seatarranger.com.Core.Extensions;
 using seatarranger.com.Core.Models;
 using seatarranger.com.Core.Services.ArrangerService;
 using seatarranger.com.Core.Services.PartyService;
@@ -22,10 +23,11 @@ namespace seatarranger.com.Controllers
         }
 
         [HttpPost]
-        public Dictionary<TableEntity, List<PartyEntity>> Post()
+        public List<ArrangementEntity> Post()
         {
             return arrangerService
-                .ArrangeParties(partyService.GetParties(), tableService.GetTables());
+                .ArrangeParties(partyService.GetParties(), tableService.GetTables())
+                .ToJson();
         }
 
         [HttpDelete]

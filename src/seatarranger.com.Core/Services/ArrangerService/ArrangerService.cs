@@ -53,12 +53,9 @@ namespace seatarranger.com.Core.Services.ArrangerService
              *      - Taylor, party of 5
              *      - Reese, party of 7
              */
-
             var finalResult = new Dictionary<TableEntity, List<PartyEntity>>();
-
             var sortedParties = partyEntities.SortByLargestPartyFirst();
             var sortedTables = tableEntities.SortByLargestTableFirst();
-
 
             /**
              * Track last added table
@@ -84,6 +81,14 @@ namespace seatarranger.com.Core.Services.ArrangerService
                     var party = sortedParties[partyIndex];
 
                     /**
+                     *  Party has already been sat. Skip to next...
+                     */
+                    if (addedParties.Contains(party))
+                    {
+                        continue;
+                    }
+
+                    /**
                      * This party ain't gonna work here...
                      *  - We throw exception becuase we know that parties and tables are 
                      *    ordered from largest to smallest.    
@@ -91,14 +96,6 @@ namespace seatarranger.com.Core.Services.ArrangerService
                     if (table.ExeedsCapacity(party))
                     {
                         throw new Exception($"The party {party.Name} ({party.Size}) was too large to accommodate.");
-                    }
-
-                    /**
-                     *  Party has already been sat. Skip to next...
-                     */
-                    if (addedParties.Contains(party))
-                    {
-                        continue;
                     }
 
                     /**
