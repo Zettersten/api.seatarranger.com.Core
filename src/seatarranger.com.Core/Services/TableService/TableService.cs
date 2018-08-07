@@ -15,6 +15,11 @@ namespace seatarranger.com.Core.Services.TableService
             this.tableRepository = tableRepository;
         }
 
+        public void Clear()
+        {
+            this.tableRepository.DbContext.Clear();
+        }
+
         public void CreateTable(TableEntity tableEntity)
         {
             #region Validation

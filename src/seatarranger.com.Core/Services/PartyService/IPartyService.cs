@@ -10,5 +10,7 @@ namespace seatarranger.com.Core.Services.PartyService
         PartyEntity GetParty(string name);
 
         List<PartyEntity> GetParties();
+
+        void Clear();
     }
 }

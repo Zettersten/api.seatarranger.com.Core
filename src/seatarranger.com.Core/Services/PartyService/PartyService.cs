@@ -15,6 +15,11 @@ namespace seatarranger.com.Core.Services.PartyService
             this.partyRepository = partyRepository;
         }
 
+        public void Clear()
+        {
+            this.partyRepository.DbContext.Clear();
+        }
+
         public void CreateParty(PartyEntity partyEntity)
         {
             #region Validation

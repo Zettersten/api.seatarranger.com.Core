@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: #012b5b;
+}
+
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.loader {
+  display: block;
+  margin: 120px auto;
+  animation: pulse 1s ease infinite;
+}
+
+
+hr {
+  border-top: 2px solid #027bff;
+}
+
+.empty {
+  width: 100%;
+  height: 120px;
+  background: #00254e;
+  border-radius: 4px;
+  margin-top: 30px;
+  box-shadow: inset 0 -1px 0 #0b3c71;
+}
+
+  .empty p {
+    color: #547ba7;
+    font-size: 18px;
+    line-height: 120px;
+  }

@@ -5,6 +5,12 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using seatarranger.com.Core.Configurations;
+using seatarranger.com.Core.Models;
+using seatarranger.com.Core.Repositories;
+using seatarranger.com.Core.Repositories.InMemoryRepository;
+using seatarranger.com.Core.Services.ArrangerService;
+using seatarranger.com.Core.Services.PartyService;
+using seatarranger.com.Core.Services.TableService;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 
@@ -22,6 +28,19 @@ namespace seatarranger.com
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /*
+             *  Repositories
+             */
+            services.AddSingleton<IRepository<string, PartyEntity>, PartyRepository>();
+            services.AddSingleton<IRepository<char, TableEntity>, TableRepository>();
+
+            /*
+             *  Services
+             */
+            services.AddSingleton<IPartyService, PartyService>();
+            services.AddSingleton<ITableService, TableService>();
+            services.AddSingleton<IArrangerService, ArrangerService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services
@@ -52,11 +71,6 @@ namespace seatarranger.com
 
                     options.SerializerSettings.ContractResolver = settings.ContractResolver;
                 });
-
-            /*
-             * Documentation
-             */
-            services.AddApiVersioning();
 
             services.AddSwaggerGen(c =>
             {
