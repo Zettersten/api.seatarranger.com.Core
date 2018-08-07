@@ -36,9 +36,7 @@
           {{table.id}}-{{table.capacity}}
         </div>
       </div>
-
     </div>
-
 
     <div class="col-8 text-center">
       <br />
@@ -65,7 +63,10 @@
                 <label for="exampleInputPassword1">Party Size</label>
                 <input type="number" name="size" [(ngModel)]="party.size" class="form-control" placeholder="Enter party size">
               </div>
-              <app-dislikes></app-dislikes>
+
+              <span class="label label-danger" *ngFor="let dislike of party.dislikes">{{dislike.name}} ({{dislike.size}})</span>
+
+              <app-dislikes (disliked)="onDisliked($event)"></app-dislikes>
               <button type="submit" class="btn btn-primary" (click)="createParty(party); expandedParty = false; expandedTable = false;">Submit</button>
               <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
             </form>

@@ -1,71 +1,62 @@
 import { Component, Inject, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import swal from 'sweetalert2';
-import { merge } from 'rxjs/observable/merge';
-import { resetFakeAsyncZone } from '@angular/core/testing';
+import { Party, Table, SeatServiceService } from '../seat-service.service';
+import { tap } from '../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
-
-  public parties: Observable<Party[]>;
-  public tables: Observable<Table[]>;
-  public arrangement: Observable<any>;
   public expandedTable: boolean;
   public expandedParty: boolean;
 
   @Input()
   public party: Observable<Party>;
+  public parties: Observable<Party[]>;
 
   @Input()
   public table: Observable<Table>;
+  public tables: Observable<Table[]>;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.getParties();
-    this.getTables();
-    this.party = this.emptyParty();
-    this.table = this.emptyTable();
+  constructor(private seatService: SeatServiceService) {
+    this.party = seatService.emptyParty();
+    this.table = seatService.emptyTable();
+    this.parties = seatService.getParties();
+    this.tables = seatService.getTables();
   }
 
-  public createTable(table): void {
-    this.http.post(this.baseUrl + 'api/tables', table).subscribe(result => {
-      this.table = this.emptyTable();
-      this.getTables();
-    }, error => this.showError(error));
+  public createTable(table: Table): void {
+    this.seatService
+      .createTable(table)
+      .subscribe(() => {
+        this.table = this.seatService.emptyTable();
+        this.tables = this.seatService.getTables();
+      });
   }
 
-  public createParty(party): void {
-    this.http.post(this.baseUrl + 'api/parties', party).subscribe(result => {
-      this.party = this.emptyParty();
-      this.getParties();
-    }, error => this.showError(error));
+  public createParty(party: Party): void {
+    this.seatService
+      .createParty(party)
+      .subscribe(() => {
+        this.party = this.seatService.emptyParty();
+        this.parties = this.seatService.getParties();
+      });
   }
 
-  public getParties(): void {
-    this.http.get<Party[]>(this.baseUrl + 'api/parties').subscribe(result => {
-      this.parties = Observable.of(result);
-    }, error => this.showError(error));
-  }
+  public onDisliked(dislikedParty: Party) {
+    this.party
+      .pipe(
+        tap(x => {
+          
+          if (x.dislikes == undefined) {
+            x.dislikes = [];
+          }
 
-  public getTables(): void {
-    this.http.get<Table[]>(this.baseUrl + 'api/tables').subscribe(result => {
-      this.tables = Observable.of(result);
-    }, error => this.showError(error));
-  }
+          x.dislikes.push(dislikedParty);
 
-  public makeArrangements(): void {
-    this.http.post(this.baseUrl + 'api/arrangements', {}).subscribe(result => {
-      this.arrangement = Observable.of(result);
-    }, error => this.showError(error));
-  }
-
-  public showError(errorObject): void {
-    swal("Uh oh...", errorObject.error.error, "error");
-    this.party = this.emptyParty();
-    this.table = this.emptyTable();
+        })
+      )
   }
 
   public get canArrange(): Observable<boolean> {
@@ -76,30 +67,4 @@ export class HomeComponent {
       })
       .map(result => result > 0);
   }
-
-  private emptyParty(): Observable<Party> {
-    return Observable.of({
-      name: "",
-      size: 0,
-      dislikes: []
-    });
-  }
-
-  private emptyTable(): Observable<Table> {
-    return Observable.of({
-      id: "",
-      capacity: 0
-    })
-  }
-}
-
-export interface Table {
-  id: string,
-  capacity: number
-}
-
-export interface Party {
-  name: string,
-  size: number,
-  dislikes?: Party[]
 }
