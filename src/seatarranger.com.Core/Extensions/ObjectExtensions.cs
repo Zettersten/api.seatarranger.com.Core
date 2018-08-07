@@ -1,5 +1,5 @@
-﻿using seatarranger.com.Core.Configurations;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using seatarranger.com.Core.Configurations;
 
 namespace seatarranger.com.Core.Extensions
 {

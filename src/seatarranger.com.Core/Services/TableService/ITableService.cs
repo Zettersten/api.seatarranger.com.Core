@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using seatarranger.com.Core.Models;
+﻿using seatarranger.com.Core.Models;
+using System.Collections.Generic;
 
 namespace seatarranger.com.Core.Services.TableService
 {

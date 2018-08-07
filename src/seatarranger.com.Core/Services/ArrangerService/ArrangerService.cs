@@ -2,7 +2,6 @@
 using seatarranger.com.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace seatarranger.com.Core.Services.ArrangerService
 {
@@ -90,8 +89,8 @@ namespace seatarranger.com.Core.Services.ArrangerService
 
                     /**
                      * This party ain't gonna work here...
-                     *  - We throw exception becuase we know that parties and tables are 
-                     *    ordered from largest to smallest.    
+                     *  - We throw exception becuase we know that parties and tables are
+                     *    ordered from largest to smallest.
                      */
                     if (table.ExeedsCapacity(party))
                     {
