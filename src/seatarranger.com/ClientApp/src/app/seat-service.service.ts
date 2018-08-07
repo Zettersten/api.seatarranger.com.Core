@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import swal from 'sweetalert2';
+import swal, { SweetAlertResult } from 'sweetalert2';
 import { catchError } from '../../node_modules/rxjs/operators';
 
 export interface Table {
@@ -63,11 +63,26 @@ export class SeatServiceService {
       );
   }
 
+  public resetArrangements(): Observable<boolean | ApiError> {
+    return this.http.delete<boolean>(this.baseUrl + 'api/arrangements')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   public handleError(error: HttpErrorResponse): Observable<ApiError> {
     swal("Uh oh...", error.error.error, "error");
     return Observable.of({
       error: <string>error.error.error
     });
+  }
+
+  public showError(message: string) : Promise<SweetAlertResult> {
+    return swal("Uh oh...", message, "error");
+  }
+
+  public showSuccess(message: string) : Promise<SweetAlertResult> {
+    return swal("Yay!", message, "success");
   }
 
   public emptyParty(): Observable<Party> {

@@ -39,3 +39,23 @@ hr {
     font-size: 18px;
     line-height: 120px;
   }
+
+  
+
+.seating {
+  width: 100%;
+  min-height: 50vh;
+  border: 2px solid rgba(255, 255, 255, 0.03);
+  margin-top: 20px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.18);
+}
+
+.seating ul {
+  text-align: left!important;
+  color: #333;
+}
+.seating ul ul {
+  color: red;
+}

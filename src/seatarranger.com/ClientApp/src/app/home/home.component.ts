@@ -1,7 +1,6 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Party, Table, SeatServiceService, ApiError } from '../seat-service.service';
-import { tap } from '../../../node_modules/rxjs/operators';
+import { Party, Table, SeatServiceService, ApiError, Arrangement } from '../seat-service.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +18,8 @@ export class HomeComponent {
   public table: Observable<Table>;
   public tables: Observable<ApiError | Table[]> = Observable.of([]);
 
+  public arrangements: Observable<Arrangement[]> = Observable.of([]);
+
   constructor(private seatService: SeatServiceService) {
     this.party = seatService.emptyParty();
     this.table = seatService.emptyTable();
@@ -30,7 +31,6 @@ export class HomeComponent {
 
   public createTable(): void {
     this.table.subscribe(result => {
-      console.log(result);
       this.seatService
         .createTable(result)
         .subscribe(() => {
@@ -42,7 +42,9 @@ export class HomeComponent {
 
   public createParty(): void {
     this.party.subscribe(result => {
+
       console.log(result);
+
       this.seatService
         .createParty(result)
         .subscribe(() => {
@@ -52,8 +54,47 @@ export class HomeComponent {
     });
   }
 
+  public makeArrangements(): void {
+    this.seatService
+      .makeArrangements()
+      .subscribe(result => {
+
+        if ((<any>result).error) {
+          return;
+        }
+
+        this.seatService
+          .showSuccess("All parties were successfully sat at the defined tables.")
+          .then(alertResult => {
+            this.arrangements = Observable.of(<any>result);
+          });
+      });
+  }
+
+  public resetArrangements(): void {
+    this.seatService
+      .resetArrangements()
+      .subscribe(result => {
+
+        if ((<any>result).error) {
+          return;
+        }
+
+        this.tables = Observable.of([]);
+        this.parties = Observable.of([]);
+      });
+  }
+
   public onDisliked(dislikedParty: Party) {
 
-    console.log(this.party);
+    console.log("dislikedParty", dislikedParty);
+
+    this.party
+      .subscribe(x => {
+        if (x.dislikes == undefined) {
+          x.dislikes = [];
+        }
+        x.dislikes.push(dislikedParty);
+      });
   }
 }

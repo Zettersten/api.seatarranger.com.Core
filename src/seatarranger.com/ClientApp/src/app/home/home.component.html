@@ -7,7 +7,7 @@
       <hr />
 
       <div *ngIf="expandedTable == true">
-        <div class="card">
+        <div class="card" *ngIf="(table | async) as table">
           <div class="card-body">
             <h5 class="card-title">Create Table</h5>
             <form>
@@ -39,9 +39,42 @@
     </div>
 
     <div class="col-8 text-center">
+      <div class="seating" *ngIf="(arrangements | async) as arrangements">
+        <div class="container-fluid">
+          <br>
+          <div class="row">
+            <div *ngFor="let arrangement of arrangements" class="col-4">
+              <div class="alert alert-light" role="alert">
+                <h4>Table {{arrangement.table.id}}</h4>
+                Table Capacity:
+                <strong>{{arrangement.table.capacity}}</strong>
+                <hr>
+                <div *ngIf="arrangement.parties.length == 0">
+                  No parties sat at this table
+                </div>
+                <ul>
+                  <li *ngFor="let party of arrangement.parties">
+                    {{party.name}} ({{party.size}})
+                    <div *ngIf="party.dislikes?.length > 0">
+                      <ul>
+                        <li *ngFor="let dislike of party.dislikes">Dislikes {{dislike.name}} ({{dislike.size}})</li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <br />
       <br />
       <button class="btn btn-lg btn-success" (click)="makeArrangements()">Create Arrangement</button>
+      <br>
+      <button class="btn btn-lg btn-link text-danger" (click)="resetArrangements()">
+        <span class="text-danger">Reset &times;</span>
+      </button>
     </div>
 
     <div class="col">
@@ -51,7 +84,7 @@
       <hr />
 
       <div *ngIf="expandedParty == true">
-        <div class="card">
+        <div class="card" *ngIf="(party | async) as party">
           <div class="card-body">
             <h5 class="card-title">Create Party</h5>
             <form>
@@ -64,15 +97,13 @@
                 <input type="number" name="size" [(ngModel)]="party.size" class="form-control" placeholder="Enter party size">
               </div>
 
-              {{party | json}}
-
-              <div *ngIf="(party | async)?.dislikes?.length > 0">
-                <span class="badge badge-pill badge-danger" *ngFor="let dislike of (party | async).dislikes">{{dislike.name}} ({{dislike.size}})</span>
+              <div *ngIf="party.dislikes?.length > 0">
+                <span class="badge badge-pill badge-danger" *ngFor="let dislike of party.dislikes">{{dislike.name}} ({{dislike.size}})</span>
                 <br>
                 <br>
               </div>
 
-              <app-dislikes (disliked)="onDisliked"></app-dislikes>
+              <app-dislikes (disliked)="onDisliked($event)"></app-dislikes>
 
               <button type="submit" class="btn btn-primary" (click)="createParty(); expandedParty = false; expandedTable = false;">Submit</button>
               <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
