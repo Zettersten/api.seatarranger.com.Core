@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DislikesComponent } from './dislikes/dislikes.component';
+import { SeatServiceService } from './seat-service.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { DislikesComponent } from './dislikes/dislikes.component';
       { path: '', component: HomeComponent, pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers: [
+    SeatServiceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

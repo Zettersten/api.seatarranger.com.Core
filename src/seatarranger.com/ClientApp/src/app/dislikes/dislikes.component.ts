@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Party, SeatServiceService } from '../seat-service.service';
 import { Observable } from 'rxjs';
 
@@ -12,16 +12,22 @@ export class DislikesComponent implements OnInit {
   @Output()
   public disliked = new EventEmitter<Party>();
 
-  public dislike: Observable<Party>;
+  @Input()
+  public dislike: Party;
 
-  constructor(private seatService: SeatServiceService) { }
+  constructor(private seatService: SeatServiceService) {
+    seatService
+      .emptyParty()
+      .subscribe(res => this.dislike = res);
+  }
 
   ngOnInit() {
   }
 
-  public createDislike(party: Party)
-  {
+  public createDislike(party: Party) {
     this.disliked.emit(party);
-    this.dislike = this.seatService.emptyParty();
+    this.seatService
+      .emptyParty()
+      .subscribe(res => this.dislike = res);
   }
 }

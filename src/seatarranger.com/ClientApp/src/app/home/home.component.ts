@@ -1,6 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Party, Table, SeatServiceService } from '../seat-service.service';
+import { Party, Table, SeatServiceService, ApiError } from '../seat-service.service';
 import { tap } from '../../../node_modules/rxjs/operators';
 
 @Component({
@@ -13,58 +13,47 @@ export class HomeComponent {
 
   @Input()
   public party: Observable<Party>;
-  public parties: Observable<Party[]>;
+  public parties: Observable<ApiError | Party[]> = Observable.of([]);
 
   @Input()
   public table: Observable<Table>;
-  public tables: Observable<Table[]>;
+  public tables: Observable<ApiError | Table[]> = Observable.of([]);
 
   constructor(private seatService: SeatServiceService) {
     this.party = seatService.emptyParty();
     this.table = seatService.emptyTable();
     this.parties = seatService.getParties();
     this.tables = seatService.getTables();
+    this.expandedTable = false;
+    this.expandedParty = false;
   }
 
-  public createTable(table: Table): void {
-    this.seatService
-      .createTable(table)
-      .subscribe(() => {
-        this.table = this.seatService.emptyTable();
-        this.tables = this.seatService.getTables();
-      });
+  public createTable(): void {
+    this.table.subscribe(result => {
+      console.log(result);
+      this.seatService
+        .createTable(result)
+        .subscribe(() => {
+          this.table = this.seatService.emptyTable();
+          this.tables = this.seatService.getTables();
+        });
+    });
   }
 
-  public createParty(party: Party): void {
-    this.seatService
-      .createParty(party)
-      .subscribe(() => {
-        this.party = this.seatService.emptyParty();
-        this.parties = this.seatService.getParties();
-      });
+  public createParty(): void {
+    this.party.subscribe(result => {
+      console.log(result);
+      this.seatService
+        .createParty(result)
+        .subscribe(() => {
+          this.party = this.seatService.emptyParty();
+          this.parties = this.seatService.getParties();
+        });
+    });
   }
 
   public onDisliked(dislikedParty: Party) {
-    this.party
-      .pipe(
-        tap(x => {
-          
-          if (x.dislikes == undefined) {
-            x.dislikes = [];
-          }
 
-          x.dislikes.push(dislikedParty);
-
-        })
-      )
-  }
-
-  public get canArrange(): Observable<boolean> {
-    return this.tables
-      .count()
-      .combineLatest(this.parties.count(), (tableCount, partyCount) => {
-        return tableCount + partyCount;
-      })
-      .map(result => result > 0);
+    console.log(this.party);
   }
 }

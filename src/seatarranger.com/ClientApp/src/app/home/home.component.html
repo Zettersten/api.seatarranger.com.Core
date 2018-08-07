@@ -19,7 +19,7 @@
                 <label for="exampleInputPassword1">Capacity</label>
                 <input type="number" name="capacity" [(ngModel)]="table.capacity" class="form-control" placeholder="Enter table capacity">
               </div>
-              <button type="submit" class="btn btn-primary" (click)="createTable(table); expandedParty = false;  expandedTable = false;">Submit {{table.id}}</button>
+              <button type="submit" class="btn btn-primary" (click)="createTable(); expandedParty = false;  expandedTable = false;">Submit {{table.id}}</button>
               <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
             </form>
           </div>
@@ -27,7 +27,7 @@
         <br />
       </div>
 
-      <div class="empty text-center" *ngIf="(tables && tables.value.length == 0) && !expandedTable">
+      <div class="empty text-center" *ngIf="(tables | async)?.length == 0 && !expandedTable">
         <p>Please Create a Table</p>
       </div>
 
@@ -41,7 +41,7 @@
     <div class="col-8 text-center">
       <br />
       <br />
-      <button class="btn btn-lg btn-success" *ngIf="canArrange | async" (click)="makeArrangements()">Create Arrangement</button>
+      <button class="btn btn-lg btn-success" (click)="makeArrangements()">Create Arrangement</button>
     </div>
 
     <div class="col">
@@ -64,10 +64,17 @@
                 <input type="number" name="size" [(ngModel)]="party.size" class="form-control" placeholder="Enter party size">
               </div>
 
-              <span class="label label-danger" *ngFor="let dislike of party.dislikes">{{dislike.name}} ({{dislike.size}})</span>
+              {{party | json}}
 
-              <app-dislikes (disliked)="onDisliked($event)"></app-dislikes>
-              <button type="submit" class="btn btn-primary" (click)="createParty(party); expandedParty = false; expandedTable = false;">Submit</button>
+              <div *ngIf="(party | async)?.dislikes?.length > 0">
+                <span class="badge badge-pill badge-danger" *ngFor="let dislike of (party | async).dislikes">{{dislike.name}} ({{dislike.size}})</span>
+                <br>
+                <br>
+              </div>
+
+              <app-dislikes (disliked)="onDisliked"></app-dislikes>
+
+              <button type="submit" class="btn btn-primary" (click)="createParty(); expandedParty = false; expandedTable = false;">Submit</button>
               <button class="btn btn-link btn-sm text-danger" (click)="expandedParty = false;  expandedTable = false;">&times; Cancel</button>
             </form>
           </div>
@@ -75,13 +82,14 @@
         <br />
       </div>
 
-      <div class="empty text-center" *ngIf="(parties && parties.value.length == 0) && !expandedParty">
+      <div class="empty text-center" *ngIf="(parties | async)?.length == 0 && !expandedParty">
         <p>Please Create a Party</p>
       </div>
 
       <div class="card" *ngFor="let party of parties | async">
         <div class="card-body">
-          {{party.name}} <strong>({{party.size}})</strong>
+          {{party.name}}
+          <strong>({{party.size}})</strong>
         </div>
       </div>
     </div>
