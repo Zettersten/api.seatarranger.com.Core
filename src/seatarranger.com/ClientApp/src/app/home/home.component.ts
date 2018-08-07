@@ -7,8 +7,11 @@ import { Observable } from 'rxjs';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+
   public parties: any;
   public tables: any;
+  public expandedTable: boolean;
+  public expandedParty: boolean;
 
   @Input()
   public party: any;
