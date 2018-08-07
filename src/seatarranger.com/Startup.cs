@@ -11,6 +11,7 @@ using seatarranger.com.Core.Repositories.InMemoryRepository;
 using seatarranger.com.Core.Services.ArrangerService;
 using seatarranger.com.Core.Services.PartyService;
 using seatarranger.com.Core.Services.TableService;
+using seatarranger.com.Middleware;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 
@@ -40,8 +41,6 @@ namespace seatarranger.com
             services.AddSingleton<IPartyService, PartyService>();
             services.AddSingleton<ITableService, TableService>();
             services.AddSingleton<IArrangerService, ArrangerService>();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services
                 .AddCors(options =>
@@ -112,19 +111,15 @@ namespace seatarranger.com
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
+			if (!env.IsDevelopment()) 
+			{
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+			app.UseExceptionHandling();
 
             app.UseMvc(routes =>
             {
