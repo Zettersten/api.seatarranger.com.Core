@@ -40,7 +40,7 @@ namespace seatarranger.com.Controllers
         }
 
         [HttpDelete("{partyName}")]
-        public bool Delete([FromBody] string partyName)
+        public bool Delete([FromRoute] string partyName)
         {
             partyService
                 .DeleteParty(partyName);

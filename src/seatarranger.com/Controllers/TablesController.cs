@@ -42,7 +42,7 @@ namespace seatarranger.com.Controllers
         }
 
         [HttpDelete("{tableId}")]
-        public bool Delete([FromBody] string tableId)
+        public bool Delete([FromRoute] string tableId)
         {
             var id = char.Parse(tableId);
 
