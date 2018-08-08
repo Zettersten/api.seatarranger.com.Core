@@ -1,3 +1,5 @@
+![logo](https://media.glassdoor.com/sqll/1001687/bytecubed-squarelogo-1437055577282.png "Logo")
+
 # Seat Arranger
 ByteCubed algorithm &amp; approach demonstration
 
@@ -18,3 +20,6 @@ This project practiced TDD where I was able to write failing tests against inter
 This demo was written in Angular6 and interacts with a RESTFul Web API. 
 - API Specification (http://wsazureeast070.azurewebsites.net/api/swagger/index.html)
 - Demo (http://wsazureeast070.azurewebsites.net/)
+#### CLI Demo
+This demo was written in .NET Core Standard library and is available to run in a container.
+- See docker-compose.yml (src/seatarranger.com.Console/DockerFile)
