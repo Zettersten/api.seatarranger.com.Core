@@ -10,7 +10,7 @@ This repository attempts to tackle the *wedding planner* challenge, where given 
 The table and party collection were unsorted and due to the nature of the application (not being a scalability challenge) it felt pertinent to allow sorting both collections from largest to smallest.
 
 ### Data structure
-For this challenge I used ArrayLists and HashSets. The ArrayLists were the structures that held both the table and party collection. The HashSet was used to track "sat" parties which allotted a reduction the overall number of interactions.
+For this challenge I used ArrayLists and HashSets. The ArrayLists were the structures that held both the table and party collection. The HashSet was used to track "sat" parties which allotted a reduction the overall number of iterations.
 
 ### Development process
 This project practiced TDD where I was able to write failing tests against interfaces and then later implementing solutions to pass said-test. I structured this project to take advantage of DI-best practices. All code is implemented against interfaces to allow for future interoperability with opportunity to change the main seating algorithm and persistence strategy.
