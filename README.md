@@ -23,3 +23,4 @@ This demo was written in Angular6 and interacts with a RESTFul Web API.
 #### CLI Demo
 This demo was written in .NET Core Standard library and is available to run in a container.
 - See docker-compose.yml (src/seatarranger.com.Console/DockerFile)
+- See docker hub (https://hub.docker.com/r/zettersten/seatarranger.com/)
