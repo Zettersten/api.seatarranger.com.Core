@@ -6,3 +6,17 @@ services:
     build:
       context: .
       dockerfile: src/seatarranger.com.Console/Dockerfile
+
+  seatarranger.com:
+    image: ${DOCKER_REGISTRY}seatarrangercom
+    build:
+      context: .
+      dockerfile: src/seatarranger.com/Dockerfile
+
+
+  seatarranger.com.core.tests:
+    image: ${DOCKER_REGISTRY}seatarrangercomcoretests
+    build:
+      context: .
+      dockerfile: src/seatarranger.com.Core.Tests/Dockerfile
+

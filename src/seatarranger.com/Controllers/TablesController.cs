@@ -40,5 +40,16 @@ namespace seatarranger.com.Controllers
 
             return tableEntity;
         }
+
+        [HttpDelete("{tableId}")]
+        public bool Delete([FromBody] string tableId)
+        {
+            var id = char.Parse(tableId);
+
+            tableService
+                .DeleteTable(id);
+
+            return true;
+        }
     }
 }

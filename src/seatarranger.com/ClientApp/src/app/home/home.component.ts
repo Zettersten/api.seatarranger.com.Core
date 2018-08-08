@@ -42,9 +42,6 @@ export class HomeComponent {
 
   public createParty(): void {
     this.party.subscribe(result => {
-
-      console.log(result);
-
       this.seatService
         .createParty(result)
         .subscribe(() => {
@@ -52,6 +49,22 @@ export class HomeComponent {
           this.parties = this.seatService.getParties();
         });
     });
+  }
+
+  public deleteParty(name: string): void {
+    this.seatService
+      .deleteParty(name)
+      .subscribe(() => {
+        this.parties = this.seatService.getParties();
+      });
+  }
+
+  public deleteTable(id: string): void {
+    this.seatService
+      .deleteTable(id)
+      .subscribe(() => {
+        this.tables = this.seatService.getTables();
+      });
   }
 
   public makeArrangements(): void {
@@ -62,12 +75,11 @@ export class HomeComponent {
         if ((<any>result).error) {
           return;
         }
-
+        
+        this.arrangements = Observable.of(<any>result);
         this.seatService
-          .showSuccess("All parties were successfully sat at the defined tables.")
-          .then(alertResult => {
-            this.arrangements = Observable.of(<any>result);
-          });
+          .showSuccess("All parties were successfully sat at the defined tables.");
+
       });
   }
 
@@ -86,9 +98,6 @@ export class HomeComponent {
   }
 
   public onDisliked(dislikedParty: Party) {
-
-    console.log("dislikedParty", dislikedParty);
-
     this.party
       .subscribe(x => {
         if (x.dislikes == undefined) {

@@ -12,5 +12,7 @@ namespace seatarranger.com.Core.Services.PartyService
         List<PartyEntity> GetParties();
 
         void Clear();
+
+        void DeleteParty(string name);
     }
 }

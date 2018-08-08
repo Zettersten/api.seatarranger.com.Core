@@ -49,8 +49,22 @@ export class SeatServiceService {
       );
   }
 
+  public deleteParty(name: string): Observable<boolean | ApiError> {
+    return this.http.delete<boolean>(this.baseUrl + 'api/parties/' + name)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   public getTables(): Observable<Table[] | ApiError> {
     return this.http.get<Table[]>(this.baseUrl + 'api/tables')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  public deleteTable(id: string): Observable<boolean | ApiError> {
+    return this.http.delete<boolean>(this.baseUrl + 'api/tables/' + id)
       .pipe(
         catchError(this.handleError)
       );

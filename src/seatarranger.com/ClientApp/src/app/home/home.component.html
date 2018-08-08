@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-lg-2 col-xl-2">
+        <div class="col-12 col-lg-2 col-xl-3">
 
             <br />
             <button (click)="expandedTable = true; expandedParty = false;" class="btn btn-large btn-primary btn-block">Create Table +</button>
@@ -33,14 +33,26 @@
                 <p>Please Create a Table</p>
             </div>
 
-            <div class="card" *ngFor="let table of tables | async">
-                <div class="card-body">
-                    {{table.id}}-{{table.capacity}}
+            <div class="container-fluid">
+                <div class="card-list row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6" *ngFor="let table of tables | async">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                {{table.id}}
+                            </div>
+                            <div class="card-body">
+                                <h4>{{table.capacity}}</h4>
+                            </div>
+                            <div class="card-footer">
+                                <button (click)="deleteTable(table.id)" class="btn-sm btn-block btn btn-danger">Remove</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 col-lg-8 col-xl-8 text-center order-1 order-xl-0">
+        <div class="col-12 col-lg-8 col-xl-6 text-center order-1 order-xl-0">
             <div class="seating" *ngIf="(arrangements | async) as arrangements">
                 <div class="container-fluid">
                     <br>
@@ -75,14 +87,14 @@
             <button class="btn btn-lg btn-success" (click)="makeArrangements()">Create Arrangement</button>
             <br>
             <button class="btn btn-lg btn-link text-danger" (click)="resetArrangements()">
-        <span class="text-danger">Reset &times;</span>
-      </button>
+                <span class="text-danger">Reset &times;</span>
+            </button>
 
             <br>
             <br>
         </div>
 
-        <div class="col col-lg-2 col-xl-2">
+        <div class="col col-lg-2 col-xl-3">
 
             <br />
             <button (click)="expandedParty = true; expandedTable = false;" class="btn btn-large btn-primary btn-block">Create Party +</button>
@@ -120,14 +132,25 @@
 
             <div class="empty text-center" *ngIf="(parties | async)?.length == 0 && !expandedParty">
                 <p>Please Create a Party</p>
-            </div>
+            </div>            
 
-            <div class="card" *ngFor="let party of parties | async">
-                <div class="card-body">
-                    {{party.name}}
-                    <strong>({{party.size}})</strong>
+            <div class="container-fluid">
+                    <div class="card-list row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6" *ngFor="let party of parties | async">
+                            <div class="card text-center">
+                                <div class="card-header">
+                                    <small>{{party.name}}</small>
+                                </div>
+                                <div class="card-body">
+                                    <h4>{{party.size}}</h4>
+                                </div>
+                                <div class="card-footer">
+                                    <button (click)="deleteParty(party.name)" class="btn-sm btn-block btn btn-danger">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>

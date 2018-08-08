@@ -44,6 +44,8 @@ namespace seatarranger.com.Core.Services.PartyService
             this.partyRepository.Create(partyEntity);
         }
 
+        public void DeleteParty(string name) => partyRepository.Delete(name);
+
         public List<PartyEntity> GetParties()
         {
             return this.partyRepository

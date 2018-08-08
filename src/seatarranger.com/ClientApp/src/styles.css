@@ -64,3 +64,7 @@ hr {
   margin: 30px auto 15px;
   display: block;
 }
+
+.card-list .card {
+  margin-bottom: 15px; 
+}

@@ -49,6 +49,8 @@ namespace seatarranger.com.Core.Services.TableService
             this.tableRepository.Create(tableEntity);
         }
 
+        public void DeleteTable(char id) => tableRepository.Delete(id);
+
         public TableEntity GetTable(char id)
         {
             return this.tableRepository.Read(id);

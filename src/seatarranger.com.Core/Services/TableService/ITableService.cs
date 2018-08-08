@@ -12,5 +12,7 @@ namespace seatarranger.com.Core.Services.TableService
         List<TableEntity> GetTables();
 
         void Clear();
+
+        void DeleteTable(char id);
     }
 }

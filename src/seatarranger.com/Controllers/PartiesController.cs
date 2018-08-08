@@ -38,5 +38,14 @@ namespace seatarranger.com.Controllers
 
             return partyEntity;
         }
+
+        [HttpDelete("{partyName}")]
+        public bool Delete([FromBody] string partyName)
+        {
+            partyService
+                .DeleteParty(partyName);
+
+            return true;
+        }
     }
 }
