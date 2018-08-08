@@ -59,3 +59,8 @@ hr {
 .seating ul ul {
   color: red;
 }
+
+.img-logo {
+  margin: 30px auto 15px;
+  display: block;
+}

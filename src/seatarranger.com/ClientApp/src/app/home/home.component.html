@@ -1,6 +1,8 @@
+<img class="img-fluid img img-logo d-lg-none d-xl-none" src="http://bytecubed.com/wp-content/uploads/2016/08/logo.png" alt="">
+
 <div class="container-fluid">
   <div class="row">
-    <div class="col">
+    <div class="col-12 col-lg-2 col-xl-2">
 
       <br />
       <button (click)="expandedTable = true; expandedParty = false;" class="btn btn-large btn-primary btn-block">Create Table +</button>
@@ -38,7 +40,7 @@
       </div>
     </div>
 
-    <div class="col-8 text-center">
+    <div class="col-12 col-lg-8 col-xl-8 text-center order-1 order-xl-0">
       <div class="seating" *ngIf="(arrangements | async) as arrangements">
         <div class="container-fluid">
           <br>
@@ -75,9 +77,12 @@
       <button class="btn btn-lg btn-link text-danger" (click)="resetArrangements()">
         <span class="text-danger">Reset &times;</span>
       </button>
+
+      <br>
+      <br>
     </div>
 
-    <div class="col">
+    <div class="col col-lg-2 col-xl-2">
 
       <br />
       <button (click)="expandedParty = true; expandedTable = false;" class="btn btn-large btn-primary btn-block">Create Party +</button>
