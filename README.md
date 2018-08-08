@@ -15,6 +15,6 @@ This project practiced TDD where I was able to write failing tests against inter
 
 ### Run the application
 #### Web demo
-This demo was written in Angular6 and interacted with a Web API. 
+This demo was written in Angular6 and interacts with a RESTFul Web API. 
 - API Specification (http://wsazureeast070.azurewebsites.net/api/swagger/index.html)
 - Demo (http://wsazureeast070.azurewebsites.net/)

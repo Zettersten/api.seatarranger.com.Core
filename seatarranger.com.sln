@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "seatarranger.com.Core", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "seatarranger.com.Core.Tests", "src\seatarranger.com.Core.Tests\seatarranger.com.Core.Tests.csproj", "{F8DBEB19-78B0-42C0-B505-B0DE9E25D5D8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "seatarranger.com.Console", "src\seatarranger.com.Console\seatarranger.com.Console.csproj", "{B41572B0-E15B-4E65-9C38-51000AC43453}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C84DED65-DFE7-4C63-BF62-D85AA4D2A5C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{F8DBEB19-78B0-42C0-B505-B0DE9E25D5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8DBEB19-78B0-42C0-B505-B0DE9E25D5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8DBEB19-78B0-42C0-B505-B0DE9E25D5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B41572B0-E15B-4E65-9C38-51000AC43453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B41572B0-E15B-4E65-9C38-51000AC43453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B41572B0-E15B-4E65-9C38-51000AC43453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B41572B0-E15B-4E65-9C38-51000AC43453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C84DED65-DFE7-4C63-BF62-D85AA4D2A5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C84DED65-DFE7-4C63-BF62-D85AA4D2A5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C84DED65-DFE7-4C63-BF62-D85AA4D2A5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C84DED65-DFE7-4C63-BF62-D85AA4D2A5C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

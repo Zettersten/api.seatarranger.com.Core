@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  seatarranger.com.console:
+    image: ${DOCKER_REGISTRY}seatarrangercomconsole
+    build:
+      context: .
+      dockerfile: src/seatarranger.com.Console/Dockerfile
