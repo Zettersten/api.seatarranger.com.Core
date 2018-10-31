@@ -16,10 +16,6 @@ For this challenge I used ArrayLists and HashSets. The ArrayLists were the struc
 This project practiced TDD where I was able to write failing tests against interfaces and then later implementing solutions to pass said-test. I structured this project to take advantage of DI-best practices. All code is implemented against interfaces to allow for future interoperability with opportunity to change the main seating algorithm and persistence strategy.
 
 ### Run the application
-#### Web demo
-This demo was written in Angular6 and interacts with a RESTFul Web API. 
-- API Specification (http://wsazureeast070.azurewebsites.net/api/swagger/index.html)
-- Demo (http://wsazureeast070.azurewebsites.net/)
 #### CLI Demo
 This demo was written in .NET Core Standard library and is available to run in a container.
 - See docker-compose.yml (src/seatarranger.com.Console/DockerFile)
